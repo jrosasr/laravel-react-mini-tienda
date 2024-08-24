@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      # - ./data:/data/db
+      - "db-volume:/data/db"
+    ports:
+      - "5432:5432"
+    networks:
+      - docker_network
+
+networks:
+  docker_network:
+    external: true
+
+volumes:
+  db-volume:
+    external: true
