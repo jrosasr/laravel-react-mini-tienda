@@ -1,6 +1,6 @@
 # Laravel + React: Mini Tienda
 
-Este proyecto es una mini tienda en línea construida utilizando Laravel 11 como backend y React 18 para el frontend.
+Este proyecto es una mini tienda en línea con roles de Administrador y cliente construida utilizando Laravel 11 como backend y React 18 para el frontend.
 
 ## Clonar el repositorio
 
