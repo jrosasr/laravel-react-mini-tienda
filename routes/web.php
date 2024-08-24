@@ -19,6 +19,13 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified', 'role:admin'])->name('dashboard');
 
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout/CheckoutPage', [
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->middleware(['auth', 'verified', 'role:client'])->name('checkout.index');
+
 // Route::get('/get-product-list', function () {
 //     return Inertia::render('Products/ProductList');
 // })->middleware(['auth', 'verified', 'role:admin'])->name('products.index');
