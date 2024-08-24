@@ -2,27 +2,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import { Button } from '@/components/ui/button';
-import { Toaster } from '@/components/ui/toaster';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -33,6 +12,8 @@ import { toast } from '@/components/ui/use-toast';
 import { useEffect, useState } from 'react';
 import { DataTable } from './data-table';
 import { columns } from './columns';
+import { FormProduct } from "./FormProduct";
+import { Button } from '@/components/ui/button';
  
 const formSchema = z.object({
   title: z.string().min(2).max(50),
@@ -88,103 +69,9 @@ export default function ProductList({ auth }: PageProps) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="flex justify-end max-w-7xl mx-auto m:px-6 lg:px-8">
-                            <Dialog>
-                                <DialogTrigger>
-                                    <Button className="mt-6">
-                                        Add Product
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>Product</DialogTitle>
-                                        <DialogDescription>
-                                            <Form {...form}>
-                                                <form
-                                                    onSubmit={form.handleSubmit(
-                                                        onSubmit
-                                                    )}
-                                                    className="space-y-8"
-                                                >
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="title"
-                                                        render={({ field }) => (
-                                                            <FormItem>
-                                                                <FormLabel>
-                                                                    title
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                    <Input
-                                                                        placeholder="Title "
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="description"
-                                                        render={({ field }) => (
-                                                            <FormItem>
-                                                                <FormLabel>
-                                                                    Description
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                    <Textarea
-                                                                        placeholder="Description..."
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="price"
-                                                        render={({ field }) => (
-                                                            <FormItem>
-                                                                <FormLabel>
-                                                                    Price
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                    <Input
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="image"
-                                                        render={({ field }) => (
-                                                            <FormItem>
-                                                                <FormLabel>
-                                                                    Url Image
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                    <Input
-                                                                        placeholder="url image"
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <Button type="submit">
-                                                        Save
-                                                    </Button>
-                                                </form>
-                                            </Form>
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                </DialogContent>
-                            </Dialog>
+                            <FormProduct>
+                              <Button className="mt-6">Add Product</Button>
+                            </FormProduct>
                         </div>
                         <div className="p-6 text-gray-900">
                             <DataTable columns={columns} data={products} />
@@ -192,7 +79,6 @@ export default function ProductList({ auth }: PageProps) {
                     </div>
                 </div>
             </div>
-            <Toaster />
         </AuthenticatedLayout>
     );
 }

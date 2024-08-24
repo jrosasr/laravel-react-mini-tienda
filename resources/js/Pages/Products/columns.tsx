@@ -1,16 +1,11 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Product = {
-  id: string
-  title: string
-  description: string
-  price: number
-  image: string
-}
+import { Button } from "@/components/ui/button";
+import { ColumnDef } from "@tanstack/react-table";
+import { Pencil } from "lucide-react";
+import { FormProduct } from "./FormProduct";
+import { Product } from "./Product.type";
+import { DeleteRecord } from "@/components/DeleteRecord";
 
 export const columns: ColumnDef<Product>[] = [
     {
@@ -20,6 +15,14 @@ export const columns: ColumnDef<Product>[] = [
     {
         accessorKey: "image",
         header: "Image",
+        cell: ({ getValue }) => {
+            return (
+                <img
+                    src={getValue<string>()}
+                    className="h-auto w-24 object-cover"
+                />
+            );
+        },
     },
     {
         accessorKey: "title",
@@ -32,5 +35,24 @@ export const columns: ColumnDef<Product>[] = [
     {
         accessorKey: "price",
         header: "Price",
+        cell: ({ getValue }) => {
+            return <strong>${getValue<number>()}</strong>;
+        },
+    },
+    {
+        accessorKey: "action",
+        header: "Action",
+        cell: ({ row }) => {
+            return (
+                <div className="flex space-x-1">
+                    <FormProduct data={row.original}>
+                        <Button variant={"outline"} className="h-8 w-8 p-0">
+                            <Pencil className="h-4 w-4" />
+                        </Button>
+                    </FormProduct>
+                    <DeleteRecord id={row.original.id} url="/products" />
+                </div>
+            );
+        },
     },
 ];
