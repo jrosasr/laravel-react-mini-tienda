@@ -30,6 +30,12 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                     >
                                         Dashboard
                                     </NavLink>
+                                    <NavLink
+                                        href={route("products.index")}
+                                        active={route().current("products.index")}
+                                    >
+                                        Products
+                                    </NavLink>
                                 </div>
                             </div>
 
@@ -133,6 +139,12 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 active={route().current("dashboard")}
                             >
                                 Dashboard
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("products.index")}
+                                active={route().current("products.index")}
+                            >
+                                Products
                             </ResponsiveNavLink>
                         </div>
 

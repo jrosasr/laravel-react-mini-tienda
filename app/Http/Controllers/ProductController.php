@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -12,15 +13,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Products/ProductList');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function getProductList() {
+        $products = Product::all();
+        return response()->json($products);
     }
 
     /**
@@ -28,23 +26,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Product::create($request->all());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
+        return response()->json(['success' => true], 201);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified', 'role:admin'])->name('dashboard');
+
+Route::get('products/get-product-list', [ProductController::class, 'getProductList'])->middleware(['auth', 'verified', 'role:admin']);
+Route::resource('products', ProductController::class)->middleware(['auth', 'verified', 'role:admin']);
 
 Route::get('/cart/login-to-pay', function () {
     return Inertia::render('LoginToPay');
